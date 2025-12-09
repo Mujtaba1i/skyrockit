@@ -40,7 +40,6 @@ const userSchema = new mongoose.Schema({
   applications: [applicationSchema]
 })
 
-
 // model creation =================================================================================
 
 const User = mongoose.model("User", userSchema);
