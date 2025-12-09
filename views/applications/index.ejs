@@ -13,7 +13,11 @@
         <a href="/users/<%= user._id%>/applications/new">Add a App</a>
         <ul>
             <% applications.forEach(oneApp => { %>
-                <li><%= oneApp.title %> at <%= oneApp.company %></li>
+                <li>
+                    <a href="/users/<%= user._id %>/applications/<%= oneApp._id %>">
+                        <%= oneApp.title %> at <%= oneApp.company %>
+                    </a>
+                </li>
             <% }); %>
         </ul>
 </body>

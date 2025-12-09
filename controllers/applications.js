@@ -30,6 +30,20 @@ router.get('/new', async (req,res)=>{
     }
 })
 
+router.get('/:appId',async(req,res)=>{
+    try{
+        const currentUser = await User.findById(req.session.user._id)
+        const currentApplication = currentUser.applications.id(req.params.appId)
+        res.render('applications/show.ejs', { currentApplication })
+    }
+    catch(err){
+        console.error('Ran into an error: '+ err)
+        console.log('REDIRECTING ...')
+        res.redirect('/')
+    }
+
+})
+
 // POST ===========================================================================================
 
 router.post('/', async(req,res)=>{
@@ -58,6 +72,10 @@ router.post('/', async(req,res)=>{
         console.log('REDIRECTING ...')
         res.redirect('/')
    } 
+})
+
+router.post('/:appId', async(req,res)=>{
+
 })
 
 // exports ========================================================================================

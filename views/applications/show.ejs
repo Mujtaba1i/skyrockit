@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= currentApplication.title %>
+    </title>
+</head>
+
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+        <h1>
+            <%= currentApplication.title %> at <%= currentApplication.company %>
+        </h1>
+        <% if (currentApplication.notes) { %>
+            <p>Notes: <%= currentApplication.notes %></p>
+        <% } %>
+        <% if (currentApplication.postingLink) { %>
+            <a target="_blank" href="<%= currentApplication.postingLink %>">View job posting</a>
+        <% } %>
+        
+        <p>Current Status: <%= currentApplication.status %></p>
+</body>
+
+</html>

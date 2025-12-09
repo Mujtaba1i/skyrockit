@@ -13,7 +13,7 @@ const applicationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  note: {
+  notes: {
     type: String
   },
   postingLink:{
