@@ -3,7 +3,6 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
-const { route } = require('./auth')
 
 // GET ============================================================================================
 
@@ -91,7 +90,18 @@ router.post('/', async(req,res)=>{
 // UPDATE (PUT) ===================================================================================
 
 router.put('/:appId', async(req,res)=>{
-    
+    try{
+        const currentUser = await User.findById(req.session.user._id)
+        const currentApplication = currentUser.applications.id(req.params.appId)
+        currentApplication.set(req.body)
+        await currentUser.save()
+        res.redirect(`/users/${req.session.user._id}/applications/${req.params.appId}`)
+    }
+    catch(err){
+        console.error('Ran into an error: '+ err)
+        console.log('REDIRECTING ...')
+        res.redirect('/')
+    }
 })
 
 // DELETE =========================================================================================
