@@ -45,6 +45,19 @@ router.get('/:appId',async(req,res)=>{
 
 })
 
+router.get('/:appId/edit', async(req,res)=>{
+    try{
+        const currentUser = await User.findById(req.session.user._id)
+        const currentApplication = currentUser.applications.id(req.params.appId)
+        res.render('applications/edit.ejs', {currentApplication})
+    }
+    catch(err){
+        console.error('Ran into an error: '+ err)
+        console.log('REDIRECTING ...')
+        res.redirect('/')
+    }
+})
+
 // POST ===========================================================================================
 
 router.post('/', async(req,res)=>{
@@ -75,13 +88,11 @@ router.post('/', async(req,res)=>{
    } 
 })
 
-router.post('/:appId', async(req,res)=>{
+// UPDATE (PUT) ===================================================================================
 
+router.put('/:appId', async(req,res)=>{
+    
 })
-
-// UPDATE =========================================================================================
-
-
 
 // DELETE =========================================================================================
 

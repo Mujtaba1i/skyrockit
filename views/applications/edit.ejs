@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit <%= currentApplication.title %></title>
+</head>
+
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+        <h1>Edit <%= currentApplication.title %></h1>
+        <form action="/users/<%= user._id %>/applications/<%= currentApplication._id %>?_method=PUT" method="post">
+            <label for="company">Company:</label>
+            <input type="text" name="company" id="company" required value="<%= currentApplication.company %>" /><br><br>
+
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" required value="<%= currentApplication.title %>" /><br><br>
+
+            <label for="notes">Notes:</label>
+            <textarea name="notes" id="notes"><%= currentApplication.notes %></textarea><br><br>
+
+            <label for="postingLink">Posting Link:</label>
+            <input type="text" name="postingLink" id="postingLink" value="<%= currentApplication.postingLink %>" /><br><br>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="interested" <%= currentApplication.status === "interested" ? "selected" : ""%> >Interested</option>
+                <option value="applied" <%= currentApplication.status === "applied" ? "selected" : ""%> >Applied</option>
+                <option value="interviewing" <%= currentApplication.status === "interviewing" ? "selected" : ""%> >Interviewing</option>
+                <option value="rejected" <%= currentApplication.status === "rejected" ? "selected" : ""%> >Rejected</option>
+                <option value="accepted" <%= currentApplication.status === "accepted" ? "selected" : ""%> >Accepted</option>
+            </select><br><br>
+
+            <button type="submit">Edit Application</button>
+        </form>
+</body>
+
+</html>
