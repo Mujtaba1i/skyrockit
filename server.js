@@ -64,11 +64,6 @@ app.use('/auth' , authCtrl)
 
 // Protected Routes ==================================================================================
 app.use(isSignedIn)
-app.get('/vip-lounge', async(req,res)=>{
-    res.send('VIP PAGE')
-})
-
-
 
 
 
