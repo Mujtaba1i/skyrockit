@@ -17,6 +17,17 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/new', async (req,res)=>{
+    try{
+        res.render('applications/new.ejs')
+    }
+    catch(err){
+        console.log('Ran into an error:'+err)
+        console.log('REDIRECTING ...')
+        res.redirect('/')
+    }
+})
+
 // POST ===========================================================================================
 
 // exports ========================================================================================
