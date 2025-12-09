@@ -22,6 +22,11 @@
         <% } %>
         
         <p>Current Status: <%= currentApplication.status %></p>
+            
+        <form action="/users/<%= user._id %>/applications/<%= currentApplication._id %>?_method=DELETE" method="POST">
+            <button type="submit">Delete this application</button>
+        </form>
+
 </body>
 
 </html>
