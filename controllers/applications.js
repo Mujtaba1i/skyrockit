@@ -8,7 +8,9 @@ const User = require('../models/user')
 
 router.get('/', async (req, res) => {
     try{
-        res.render('applications/index.ejs')
+        const currentUser = await User.findById(req.session.user._id)
+        const {applications} = currentUser
+        res.render('applications/index.ejs', {applications})
     }
     catch(err){
         console.error('Ran into an error:'+err)
