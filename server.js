@@ -15,6 +15,7 @@ const port = process.env.PORT ? process.env.PORT : "4000"
 // controller(s) =====================================================================================
 
 const authCtrl = require("./controllers/auth")
+const applicationsCtrl = require('./controllers/applications.js');
 
 // cookies ===========================================================================================
 
@@ -55,7 +56,12 @@ app.use(passUserToView)
 
 // homepage
 app.get("/", async (req, res) => {
-    res.render('index.ejs')
+    if (req.session.user){
+        return res.redirect(`/users/${req.session.user._id}/applications`)
+    }
+    else{
+        return res.render('index.ejs')
+    }
 })
 
 // auth Routes
@@ -65,6 +71,8 @@ app.use('/auth' , authCtrl)
 // Protected Routes ==================================================================================
 app.use(isSignedIn)
 
+// applications Routes
+app.use('/users/:userId/applications' , applicationsCtrl)
 
 
 
