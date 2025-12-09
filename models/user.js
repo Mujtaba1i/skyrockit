@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 // Embeded Schema(s) ============================================================================
 
 const applicationSchema = new mongoose.Schema({
-  comapny: {
+  company: {
     type: String,
     required: true,
   },

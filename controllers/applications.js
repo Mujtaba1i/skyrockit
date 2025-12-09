@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         res.render('applications/index.ejs')
     }
     catch(err){
-        console.log('Ran into an error:'+err)
+        console.error('Ran into an error:'+err)
         console.log('REDIRECTING ...')
         res.redirect('/')
     }
@@ -22,13 +22,41 @@ router.get('/new', async (req,res)=>{
         res.render('applications/new.ejs')
     }
     catch(err){
-        console.log('Ran into an error:'+err)
+        console.error('Ran into an error:'+err)
         console.log('REDIRECTING ...')
         res.redirect('/')
     }
 })
 
 // POST ===========================================================================================
+
+router.post('/', async(req,res)=>{
+   try{
+       try{
+            // find the current user
+            const currentUser = await User.findById(req.session.user._id)
+            
+            // push the new application to User.applications
+            currentUser.applications.push(req.body)
+
+            // await User.save()
+            await currentUser.save()
+
+            // redirect to the index
+            res.redirect(`/users/${req.session.user._id}/applications`)
+        }
+        catch(err){
+            console.error('Ran into an error: '+ err)
+            console.log('REDIRECTING ...')
+            res.redirect('/')
+        }
+   }
+   catch(err){
+        console.error('Ran into an error: '+ err)
+        console.log('REDIRECTING ...')
+        res.redirect('/')
+   } 
+})
 
 // exports ========================================================================================
 
