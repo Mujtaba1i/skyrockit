@@ -12,7 +12,6 @@ const passUserToView = require("./middleware/pass-user-to-view.js")
 const app = express()
 const port = process.env.PORT ? process.env.PORT : "4000" 
 
-
 // controller(s) =====================================================================================
 
 const authCtrl = require("./controllers/auth")

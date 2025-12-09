@@ -2,7 +2,31 @@
 
 const mongoose = require("mongoose");
 
-// Schema =======================================================================================
+// Embeded Schema(s) ============================================================================
+
+const applicationSchema = new mongoose.Schema({
+  comapny: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  note: {
+    type: String
+  },
+  postingLink:{
+    type: String
+  },
+  status: {
+    type: String,
+    enum: ['interested', 'applied', 'interviewing', 'rejected', 'accepted'],
+    required: true
+  }
+})
+
+// Main Schema ====================================================================================
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -12,8 +36,10 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  }
+  },
+  applications: [applicationSchema]
 })
+
 
 // model creation =================================================================================
 
