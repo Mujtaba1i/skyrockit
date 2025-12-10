@@ -17,7 +17,7 @@ const port = process.env.PORT ? process.env.PORT : "4000"
 const authCtrl = require("./controllers/auth")
 const applicationsCtrl = require('./controllers/applications.js');
 
-// cookies ===========================================================================================
+// session cookies ===================================================================================
 
 app.use(
     session({
@@ -73,9 +73,6 @@ app.use(isSignedIn)
 
 // applications Routes
 app.use('/users/:userId/applications' , applicationsCtrl)
-
-
-
 
 
 

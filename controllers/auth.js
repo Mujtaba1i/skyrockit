@@ -60,8 +60,6 @@ router.post('/sign-up', async(req,res)=>{
     })
 })
 
-// ============================================
-
 router.post('/sign-in', async(req,res)=>{
     const {username, password} = req.body
 
