@@ -2,15 +2,19 @@
 
 require("dotenv").config()
 const express = require("express")
-const mongoose = require("mongoose")
 const morgan = require("morgan")
 const methodOverride = require("method-override")
 const session = require('express-session')
 const {MongoStore} = require("connect-mongo")
 const isSignedIn = require("./middleware/isSignedIn")
-const passUserToView = require("./middleware/pass-user-to-view.js")
+const passUserToView = require("./middleware/passUserToView.js")
+const path = require('path')
 const app = express()
 const port = process.env.PORT ? process.env.PORT : "4000" 
+
+// Connecting to DB ==================================================================================
+
+require('./config/database.js');
 
 // controller(s) =====================================================================================
 
@@ -30,22 +34,16 @@ app.use(
         })
 )
 
+// Style Sheet =======================================================================================
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 // middleware ========================================================================================
 
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride("_method"))
 app.use(morgan("dev"))
-
-// connecting to DB ==================================================================================
-
-try{
-    mongoose.connect(process.env.MONGODB_URI);
-    mongoose.connection.on("connected", () => console.log(`Connected to MongoDB: ${mongoose.connection.name}`))
-}
-catch(err){
-    console.log('Ran into an error: ' + err)
-}
 
 // Routes ============================================================================================
 
@@ -73,6 +71,8 @@ app.use(isSignedIn)
 
 // applications Routes
 app.use('/users/:userId/applications' , applicationsCtrl)
+
+
 
 
 
